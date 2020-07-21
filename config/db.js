@@ -1,0 +1,25 @@
+// mongodb connection
+
+const mongoose = require('mongoose');
+const config = require('config');
+const db = config.get('mongoURI');
+
+const connectDB = async () => {
+
+    // try/catch method will be used to see if we get errors
+
+    try {
+        await mongoose.connect(db, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+
+        console.log('MongoDB Connected...')
+    } catch (err) {
+        console.error(err.message);
+
+        process.exit(1); // Exit process with failure
+    }
+}
+
+module.exports = connectDB;
